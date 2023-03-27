@@ -1,5 +1,6 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.ProductCategory;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

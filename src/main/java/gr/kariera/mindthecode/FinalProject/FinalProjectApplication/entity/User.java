@@ -1,10 +1,11 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.UserRole;
 import jakarta.persistence.*;
 
 import java.util.Set;
 
-@Entity
+@Entity(name=" users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

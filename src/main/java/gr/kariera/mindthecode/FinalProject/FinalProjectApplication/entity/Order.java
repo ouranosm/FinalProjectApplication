@@ -1,5 +1,6 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
+package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums;
 
 public enum ProductCategory {
     FOOD,
