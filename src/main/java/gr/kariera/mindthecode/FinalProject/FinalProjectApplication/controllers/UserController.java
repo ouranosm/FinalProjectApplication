@@ -18,12 +18,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.created(URI.create("/api/users/" + createdUser.getId())).body(createdUser);
-    }
-
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUser(@PathVariable Long userId) {
         User user = userService.getUserById(userId);
@@ -35,6 +29,17 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() {
         return UserService.getAllUsers();
+    }
+
+    @PostMapping("")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.created(URI.create("/api/users/" + createdUser.getId())).body(createdUser);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }
 

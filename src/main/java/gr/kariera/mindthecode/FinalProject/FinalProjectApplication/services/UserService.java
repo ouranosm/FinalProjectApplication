@@ -28,14 +28,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User updatedUser, Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user id: " + id));
-        user.setName(updatedUser.getName());
-        user.setEmail(updatedUser.getEmail());
-        user.setCart(updatedUser.getCart());
-        return userRepository.save(user);
-    }
+
+
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user id: " + id));
