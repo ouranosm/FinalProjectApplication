@@ -37,6 +37,7 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
 
+
     public Cart getCart() {
         return cart;
     }
