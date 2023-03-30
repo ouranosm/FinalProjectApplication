@@ -1,13 +1,14 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.controller;
+
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.User;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;

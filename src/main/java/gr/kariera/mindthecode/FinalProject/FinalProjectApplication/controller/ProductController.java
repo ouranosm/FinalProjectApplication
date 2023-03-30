@@ -1,4 +1,5 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.controller;
+
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto.ProductCreateDto;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.Product;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.service.ProductService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 public class ProductController {
     private final ProductService productService;
 
