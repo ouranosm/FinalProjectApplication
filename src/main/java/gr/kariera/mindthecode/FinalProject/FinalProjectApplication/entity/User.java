@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.UserRole;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity(name=" users")
@@ -25,7 +28,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private Set<Order> orders;
+    List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -88,9 +91,13 @@ public class User {
         this.userRole = userRole;
     }
 
-   public Set<Order> getOrders() {
+   public List<Order> getOrders() {
         return orders;    }
-   public void setOrders(Set<Order> orders) {
+   public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 }

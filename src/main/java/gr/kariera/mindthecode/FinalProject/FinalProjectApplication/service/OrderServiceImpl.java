@@ -39,8 +39,8 @@ public class OrderServiceImpl implements OrderService{
 
         Order order = new Order();
         BigDecimal totalPrice =new BigDecimal(0);
-        Set<OrderProduct> setOrder = new HashSet<>();
-        Set<OrderProduct> setProduct = new HashSet<>();
+        BigDecimal totalQuantity = new BigDecimal(0);
+
 
         User user = userRepository.findById(orderCreateDto.getUserId()).orElseThrow();
         order.setUser(user);
@@ -53,37 +53,47 @@ public class OrderServiceImpl implements OrderService{
                 throw new RuntimeException(
                         "Insufficient stock for product with id: " + orderProductCreateDto.getProductId());
             }
+            product.setStock(product.getStock().subtract(orderProductCreateDto.getQuantity()));
             OrderProduct orderProduct = new OrderProduct(order, product);
             orderProduct.setQuantity(orderProductCreateDto.getQuantity());
             orderProduct.setPrice(product.getPrice().multiply(orderProductCreateDto.getQuantity()));
-            //order.getOrderProducts().add(orderProduct);
-            //product.getOrderProducts().add(orderProduct);
-            setOrder.add(orderProduct);
-            setProduct.add(orderProduct);
-            product.setOrderProducts(setProduct);
+
+
+
+            order.getOrderProducts().add(orderProduct);
+            orderProduct .getProduct().getOrderProducts().add(orderProduct);
+
+            totalQuantity = totalQuantity.add(orderProductCreateDto.getQuantity());
             totalPrice = totalPrice.add(product.getPrice().multiply(orderProductCreateDto.getQuantity()));
         }
         order.setTotalPrice(totalPrice);
-        order.setOrderProducts(setOrder);
+        order.setTotalQuantity(totalQuantity);
+
 
         //order.setOrderProducts(orderCreateDto.getOrderProducts());
         order.setAddress(orderCreateDto.getAddress());
+        user.addOrder(order);
 
         return orderRepository.save(order);
     }
 
     @Override
     public Order getById(Integer id) {
-        return null;
+        return orderRepository.findById(id).orElseThrow(()->new RuntimeException("Order with id: " + id + " not found"));
     }
 
     @Override
     public List<Order> getAll() {
-        return null;
+        return orderRepository.findAll();
     }
 
     @Override
     public void deleteById(Integer id) {
+        try {
+            orderRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println("Could not delete order with id: " + id);
+        }
 
     }
 
