@@ -29,6 +29,8 @@ public class OrderProduct {
 
     private BigDecimal quantity;
 
+    public int a;
+
     private BigDecimal price;
 
     public OrderProduct() {
