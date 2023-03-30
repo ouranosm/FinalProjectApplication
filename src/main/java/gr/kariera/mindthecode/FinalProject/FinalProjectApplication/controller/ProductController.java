@@ -1,4 +1,5 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.controller;
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto.ProductCreateDto;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.Product;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody ProductCreateDto productCreateDto) {
+        Product product = new Product();
+        product.setName(productCreateDto.getName());
+        product.setPhoto(productCreateDto.getPhoto());
+        product.setPrice(productCreateDto.getPrice());
+        product.setStock(productCreateDto.getStock());
+        product.setProductCategory(productCreateDto.getProductCategory());
         return new ResponseEntity<>(productService.create(product), HttpStatus.CREATED);
     }
 

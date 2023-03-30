@@ -16,26 +16,35 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product create(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
     @Override
     public Product getById(Integer id) {
-        return null;
+        return productRepository.findById(id).orElseThrow(()->new RuntimeException("Product with id: " + id + " not found"));
     }
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return productRepository.findAll();
     }
 
     @Override
     public void deleteById(Integer id) {
+        try {
+            productRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println("Could not delete product with id: " + id);
+        }
 
     }
 
     @Override
     public void update(Integer id, Product product) {
+        Product product1 = productRepository.findById(id).orElseThrow();
+        product1.setPrice(product.getPrice());
+        product1.setName(product.getName());
+        productRepository.save(product1);
 
     }
 }

@@ -1,30 +1,52 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+
+import static jakarta.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 public class OrderProduct {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @EmbeddedId
+    private OrderProductKey id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @MapsId("orderId")
+    @JoinColumn(name = "ORDER_ID")
+    @JsonIgnore
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @MapsId("productId")
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     private BigDecimal quantity;
 
-    public Integer getId() {
+    private BigDecimal price;
+
+    public OrderProduct() {
+    }
+
+
+
+    public OrderProduct(Order order, Product product) {
+        this.order = order;
+        this.product = product;
+        this.id = new OrderProductKey(order.getId(), product.getId());
+    }
+
+    public OrderProductKey getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(OrderProductKey id) {
         this.id = id;
     }
 
@@ -50,5 +72,13 @@ public class OrderProduct {
 
     public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

@@ -1,11 +1,12 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.service;
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto.OrderCreateDto;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.Order;
 
 import java.util.List;
 
 public interface OrderService {
 
-    Order create(Order order);
+    Order create(OrderCreateDto orderCreateDto);
 
     Order getById(Integer id);
 

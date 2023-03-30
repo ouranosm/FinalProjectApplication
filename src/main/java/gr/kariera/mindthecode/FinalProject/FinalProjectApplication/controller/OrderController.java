@@ -1,5 +1,6 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.controller;
 
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto.OrderCreateDto;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.Order;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.service.OrderService;
 import org.springframework.http.HttpStatus;
@@ -29,8 +30,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        return new ResponseEntity<>(orderService.create(order), HttpStatus.CREATED);
+    public ResponseEntity<Order> createOrder(@RequestBody OrderCreateDto orderCreateDto) {
+        return new ResponseEntity<>(orderService.create(orderCreateDto), HttpStatus.CREATED);
     }
 
     @PostMapping("/{id}")

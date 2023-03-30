@@ -1,16 +1,9 @@
-package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
+package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.UserRole;
-import jakarta.persistence.*;
 
-import java.util.Set;
-
-@Entity(name=" users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class UserDto {
+    private Long id;
 
     private String firstName;
 
@@ -19,32 +12,13 @@ public class User {
     private String email;
 
     private String password;
-
-    @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private Set<Order> orders;
-
-    public User() {
-    }
-
-    public User(Integer id, String firstName, String lastName, String email, String password, UserRole userRole, Set<Order> orders) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.userRole = userRole;
-//        this.orders = orders;
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,11 +60,5 @@ public class User {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
-    }
-
-   public Set<Order> getOrders() {
-        return orders;    }
-   public void setOrders(Set<Order> orders) {
-        this.orders = orders;
     }
 }

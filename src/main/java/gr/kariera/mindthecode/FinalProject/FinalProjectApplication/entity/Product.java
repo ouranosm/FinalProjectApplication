@@ -1,9 +1,13 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.enums.ProductCategory;
 import jakarta.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,15 +25,23 @@ public class Product {
 
     private BigDecimal stock;
 
-    @OneToMany(mappedBy = "product")
-    Set<OrderProduct> orderProducts;
+    private BigDecimal price;
 
-    public Product(Integer id, String name, ProductCategory productCategory, String photo, BigDecimal stock, Set<OrderProduct> orderProducts) {
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
+    Set<OrderProduct> orderProducts= new HashSet<>();
+
+    public Product() {
+    }
+
+    public Product(Integer id, String name, ProductCategory productCategory, String photo, BigDecimal stock, BigDecimal price, Set<OrderProduct> orderProducts) {
         this.id = id;
         this.name = name;
         this.productCategory = productCategory;
         this.photo = photo;
         this.stock = stock;
+        this.price = price;
         this.orderProducts = orderProducts;
     }
 
@@ -79,5 +91,13 @@ public class Product {
 
     public void setStock(BigDecimal stock) {
         this.stock = stock;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

@@ -16,12 +16,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User create(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
     public User getById(Integer id) {
-        return null;
+        return userRepository.findById(id).orElseThrow(()->new RuntimeException("User with id: " + id + " not found"));
     }
 
     @Override
