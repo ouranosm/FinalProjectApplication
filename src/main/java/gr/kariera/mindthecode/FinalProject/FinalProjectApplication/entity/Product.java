@@ -8,6 +8,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -98,6 +99,26 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return getId().equals(product.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    public Product(String name, ProductCategory productCategory, String photo, BigDecimal stock, BigDecimal price) {
+        this.name = name;
+        this.productCategory = productCategory;
+        this.photo = photo;
+        this.stock = stock;
         this.price = price;
     }
 }

@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService{
 
 
             order.getOrderProducts().add(orderProduct);
-            orderProduct .getProduct().getOrderProducts().add(orderProduct);
+            orderProduct.getProduct().getOrderProducts().add(orderProduct);
 
             totalQuantity = totalQuantity.add(orderProductCreateDto.getQuantity());
             totalPrice = totalPrice.add(product.getPrice().multiply(orderProductCreateDto.getQuantity()));
