@@ -14,15 +14,16 @@
     <hr>
     <h2>Save product</h2>
 
-    <form action="#" th:action = "@{/saveProduct}" th:object = "${product}" method ="POST">
-        <input type="text" th:field = "*{name}" placeholder="Product name" class="form-control mb-4 col-4">
+    <form action="#" th:action="@{/saveProduct}" th:object="${product}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Product name" class="form-control mb-4 col-4">
         <input type="text" th:field = "*{productCategory}" placeholder="Product category" class="form-control mb-4 col-4">
-        <input type="text" th:field = "*{photo}" placeholder="Product photo" class="form-control mb-4 col-4">
-        <input type="text" th:field = "*{stock}" placeholder="Product stock" class="form-control mb-4 col-4">
-        <input type="text" th:field = "*{price}" placeholder="Product price" class="form-control mb-4 col-4">
-
-        <button type="submit" class= "btn btn-info col-2"> Save Product</button>
+        <input type="text" th:field="*{photo}" placeholder="Product photo" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{stock}" placeholder="Product stock" class="form-control mb-4 col-4">
+        <input type="text" th:field="*{price}" placeholder="Product price" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Save Product</button>
     </form>
+
+
 </div>
 
 </body>
