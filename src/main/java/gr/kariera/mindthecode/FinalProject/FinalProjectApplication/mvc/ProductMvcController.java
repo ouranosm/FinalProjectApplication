@@ -35,7 +35,7 @@ public class ProductMvcController {
     public String showFormForUpdate(@PathVariable (value = "id") Integer id, Model model) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
-        return "redirect:/products/index";
+        return "update_product";
     }
     @GetMapping("/deleteProduct/{id}")
     public String deleteProduct(@PathVariable (value = "id") Integer id) {
