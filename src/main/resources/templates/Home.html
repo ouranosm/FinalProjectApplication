@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>My E-commerce Application</title>
+    <title>e-Shop</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
@@ -16,14 +16,32 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/products}">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/orders}">Orders</a>
+            <li th:each="product : ${products}">
+                <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
             </li>
         </ul>
     </div>
 </nav>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="@{/orders/index}" class="btn btn-primary btn-lg btn-block">Customer</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/products/index}" class="btn btn-secondary btn-lg btn-block">Admin</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADsjlNkvkkD27L9zV9CmYiN+QSmOmBT7EgoxN7i/peWUuJXwG32hjNX0W"
+        crossorigin="anonymous"></script>
 </body>
 </html>

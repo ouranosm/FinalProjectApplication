@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>e-Shop</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">My E-commerce Application</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/index}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li th:each="product : ${products}">
+                <a th:href="@{/products/{id}(id=${product.id})}" th:text="${product.name}"></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/orders}">Orders</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 th:if="${product.id}">Update Product</h1>
+            <h1 th:unless="${product.id}">Create Product</h1>
+
+            <form th:action="@{${product}? '/products/update' : '/products/create'}" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${product?.name}" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category" name="productCategory" th:value="${product?.productCategory}" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" th:value="${product?.price}" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Stock</label>
+                    <input type="number" class="form-control" id="stock" name="stock" th:value="${product?.stock}" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a th:href="@{/products/index}" class="btn btn-secondary">Cancel</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
