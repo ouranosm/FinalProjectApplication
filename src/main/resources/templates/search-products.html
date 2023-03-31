@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-6">
+    <input type="text" class="form-control" id="product-search" placeholder="Search products...">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody id="product-table">
+      <tr th:each="product : ${products}" class="product">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.stock}"></td>
+        <td th:text="${product.price}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#product-search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#product-table tr.product").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

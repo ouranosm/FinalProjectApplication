@@ -16,10 +16,27 @@
             <a th:href="@{/orders/index}" class="btn btn-primary btn-lg btn-block">Customer</a>
         </div>
         <div class="col-md-6">
-            <a th:href="@{/products/index}" class="btn btn-secondary btn-lg btn-block">Admin</a>
+            <a th:href="@{/products/index}" class="btn btn-secondary btn-lg btn-block" onclick="showPasswordPopup()">Admin</a>
         </div>
+
+        <script>
+    function showPasswordPopup() {
+        var password = prompt("Please enter the admin password:");
+        if (password === "admin") {
+            window.location.href = "/products/index";
+        } else {
+            alert("Incorrect password, please try again.");
+        }
+    }
+</script>
+
+
+
+
+    </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -30,5 +47,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADsjlNkvkkD27L9zV9CmYiN+QSmOmBT7EgoxN7i/peWUuJXwG32hjNX0W"
         crossorigin="anonymous"></script>
+
+<div class="element1"></div>
+<div style="margin-bottom: 32px;"></div>
+<div class="element2"></div>
+
 </body>
+
 </html>
