@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<User> updateOrderById(@PathVariable Integer id, @RequestBody User user) {
+    public ResponseEntity<User> updateUserById(@PathVariable Integer id, @RequestBody User user) {
         userService.update(id, user);
         return ResponseEntity.ok(userService.getById(id));
     }
@@ -42,4 +42,5 @@ public class UserController {
     public void deleteUserById(@PathVariable Integer id) {
         userService.deleteById(id);
     }
+
 }
