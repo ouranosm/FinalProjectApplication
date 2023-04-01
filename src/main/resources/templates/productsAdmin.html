@@ -28,40 +28,62 @@
 
 </nav>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row mb-4">
+    <div class="col-md-6 offset-md-6">
+        <input type="text" class="form-control" id="product-search" placeholder="Search products...">
+    </div>
+</div>
+
 <div align="left" class="container my-2"></div>
 
-<div class="container mt-5">
-    <div class="container">
+<div class="row">
+    <div class="col-md-12">
         <h1 class="my-4">Products</h1>
-        <table class="table">
+        <table class="table" id="product-table">
             <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Product Category</th>
-                    <th>Product Photo</th>
-                    <th>Product Stock</th>
-                    <th>Product Price</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Product Category</th>
+                <th>Photo</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Action</th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="product : ${products}">
-                    <td th:text="${product.id}">Product ID</td>
-                    <td th:text="${product.name}">Name</td>
-                    <td th:text="${product.productCategory}">Product Category</td>
-                    <td th:text="${product.photo}">Photo</td>
-                    <td th:text="${product.stock}">Stock</td>
-                    <td th:text="${product.price}">Price</td>
-                    <td> <a th:href="@{/showFormForUpdate/{id}(id=${product.id})}" class="btn btn-primary">Update</a>
-                        <a th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
+            <tr th:each="product : ${products}" class="product">
+                <td th:text="${product.id}" class="align-middle">Product ID</td>
+                <td th:text="${product.name}" class="align-middle">Name</td>
+                <td th:text="${product.productCategory}" class="align-middle">Product Category</td>
+                <td>
+                    <img th:src="${product.photo}" class="img-fluid rounded" alt="Product Photo" style="max-height: 100px">
+                </td>
+                <td th:text="${product.stock}" class="align-middle">Stock</td>
+                <td th:text="${product.price}" class="align-middle">Price</td>
+                <td class="align-middle">
+                    <a th:href="@{/showFormForUpdate/{id}(id=${product.id})}" class="btn btn-primary mr-2">Update</a>
+                    <a th:href="@{/deleteProduct/{id}(id=${product.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
             </tbody>
         </table>
+
+
         <a th:href = "@{/newProductForm}" class ="btn btn-primary btn-sm mb-3"> Add Product</a>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#product-search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#product-table tbody tr.product").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 
 
