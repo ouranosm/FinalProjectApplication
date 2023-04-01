@@ -2,6 +2,7 @@ package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.mvc;
 
 
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.dto.OrderCreateDto;
+import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity.Product;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.repository.OrderRepository;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.repository.ProductRepository;
 import gr.kariera.mindthecode.FinalProject.FinalProjectApplication.repository.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class OrderMvcController {
@@ -38,18 +41,18 @@ public class OrderMvcController {
         model.addAttribute("orders", orderService.getAll());
         return "orders";
     }
-
-    @GetMapping("/newOrderForm")
+    @GetMapping("/orders/newOrderForm")
     public String newOrderForm(Model model) {
         OrderCreateDto orderCreateDto = new OrderCreateDto();
+        List<Product> productList = productService.getAll();
+        model.addAttribute("products", productList);
         model.addAttribute("orderCreateDto", orderCreateDto);
 
-
-        return "createOrder";
+        return "order-form";
     }
 
-    @PostMapping("/saveOrder")
-    public String saveOrder(@ModelAttribute("orderCreateDto") OrderCreateDto orderCreateDto) {
+    @PostMapping("/orders/saveOrder")
+    public String saveOrder(@ModelAttribute("orderCreateDto")OrderCreateDto orderCreateDto) {
 
         orderService.create(orderCreateDto);
         return "redirect:/orders/index";
