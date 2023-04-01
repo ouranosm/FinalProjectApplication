@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService{
         User user = userRepository.findById(orderCreateDto.getUserId()).orElseThrow();
         order.setUser(user);
 
-
+        if(orderCreateDto.orderProductCreateDto != null) {
         for(OrderProductCreateDto orderProductCreateDto : orderCreateDto.orderProductCreateDto) {
             Product product = productRepository.findById(orderProductCreateDto.getProductId()).orElseThrow();
 
@@ -67,12 +67,13 @@ public class OrderServiceImpl implements OrderService{
             totalPrice = totalPrice.add(product.getPrice().multiply(orderProductCreateDto.getQuantity()));
         }
         order.setTotalPrice(totalPrice);
-        order.setTotalQuantity(totalQuantity);
+        order.setTotalQuantity(totalQuantity); }
 
 
         //order.setOrderProducts(orderCreateDto.getOrderProducts());
         order.setAddress(orderCreateDto.getAddress());
         user.addOrder(order);
+        //order.setUserId(user.getId());
 
         return orderRepository.save(order);
     }

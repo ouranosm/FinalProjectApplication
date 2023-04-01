@@ -1,5 +1,7 @@
 package gr.kariera.mindthecode.FinalProject.FinalProjectApplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -21,7 +23,11 @@ public class Order {
 
     private BigDecimal totalPrice;
 
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User user;
 
 //    @Enumerated(value = EnumType.STRING)
@@ -29,6 +35,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
+            @Column(nullable = false)
     Set<OrderProduct> orderProducts = new HashSet<>();
 
 
