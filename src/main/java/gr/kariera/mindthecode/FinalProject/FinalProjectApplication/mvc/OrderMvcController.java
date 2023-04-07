@@ -63,43 +63,6 @@ public class OrderMvcController {
         orderService.create(orderCreateDto);
         return "redirect:/orders/index";
     }
-//    @PostMapping("/addProduct")
-//    public String addProductToOrder(@RequestParam Integer orderId, @ModelAttribute OrderProduct orderProduct, Model model ){
-//
-//        Order a= orderService.getById(orderId);
-//        Set<OrderProduct> products = a.getOrderProducts();
-//        for(OrderProduct op :products){
-//            if(op.getProduct().getId().equals(orderProduct.getProduct().getId())){
-//                op.setQuantity(orderProduct.getQuantity().add(op.getQuantity()));
-//                products.add(op);
-//                a.setOrderProducts(products);
-//                orderRepository.save(a);
-//                model.addAttribute("products",findProductsInOrder(a));
-//
-//
-//                return "redirect:/orders/index";
-//            }
-//        }
-//        products.add(orderProduct);
-//        a.setOrderProducts(products);
-//        orderRepository.save(a);
-//        model.addAttribute("products",findProductsInOrder(a));
-//        return "redirect:/orders/index";
-////Todo find products by id from orderproducts grammi 65 pernw ola ta orders ara kai ta id
-//        //Todo vazwta products sto model attributes
-//    }
-
-//    private List<Product> findProductsInOrder (Order order){
-//        List<Integer> productIds = new ArrayList<>();
-//        for(OrderProduct op :order.getOrderProducts()){
-//            productIds.add(op.getProduct().getId());
-//        }
-//        List<Product> products = new ArrayList<>();
-//        for(Integer prodid : productIds){
-//            products.add(productService.getById(prodid));
-//        }
-//        return products;
-//    }
 
 
 
